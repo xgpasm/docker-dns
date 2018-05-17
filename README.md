@@ -1,7 +1,4 @@
-[![Circle CI](https://circleci.com/gh/sameersbn/docker-bind.svg?style=shield)](https://circleci.com/gh/sameersbn/docker-bind) [![Docker Repository on Quay.io](https://quay.io/repository/sameersbn/bind/status "Docker Repository on Quay.io")](https://quay.io/repository/sameersbn/bind)
-
-# sameersbn/bind:9.10.3-20180127
-
+# dockerdns
 - [Introduction](#introduction)
   - [Contributing](#contributing)
   - [Issues](#issues)
@@ -44,18 +41,18 @@ If the above recommendations do not help then [report your issue](../../issues/n
 
 ## Installation
 
-Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/sameersbn/bind) and is the recommended method of installation.
+Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/bind) and is the recommended method of installation.
 
-> **Note**: Builds are also available on [Quay.io](https://quay.io/repository/sameersbn/bind)
+> **Note**: Builds are also available on [Quay.io](https://quay.io/repository/bind)
 
 ```bash
-docker pull sameersbn/bind:9.10.3-20180127
+docker pull docker-dns
 ```
 
 Alternatively you can build the image yourself.
 
 ```bash
-docker build -t sameersbn/bind github.com/sameersbn/docker-bind
+docker build -t sameersbn/bind github.com/docker-bind
 ```
 
 ## Quickstart
@@ -66,7 +63,7 @@ Start BIND using:
 docker run --name bind -d --restart=always \
   --publish 53:53/tcp --publish 53:53/udp --publish 10000:10000/tcp \
   --volume /srv/docker/bind:/data \
-  sameersbn/bind:9.10.3-20180127
+  dockerdns/latest
 ```
 
 *Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml) file to start the container using [Docker Compose](https://docs.docker.com/compose/)*
@@ -85,7 +82,7 @@ You can customize the launch command of BIND server by specifying arguments to `
 docker run --name bind -it --rm \
   --publish 53:53/tcp --publish 53:53/udp --publish 10000:10000/tcp \
   --volume /srv/docker/bind:/data \
-  sameersbn/bind:9.10.3-20180127 -h
+  dockerdns/latest -h
 ```
 
 ## Persistence
@@ -97,8 +94,8 @@ For the BIND to preserve its state across container shutdown and startup you sho
 SELinux users should update the security context of the host mountpoint so that it plays nicely with Docker:
 
 ```bash
-mkdir -p /srv/docker/bind
-chcon -Rt svirt_sandbox_file_t /srv/docker/bind
+mkdir -p /srv/docker/dns
+chcon -Rt svirt_sandbox_file_t /srv/docker/dns
 ```
 
 # Maintenance
