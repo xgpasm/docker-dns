@@ -1,0 +1,16 @@
+; IP Address-to-Host DNS Pointers for the 192.168.0 subnet
+@ IN SOA ubuntu.home.lan. hostmaster.home.lan. (
+    2008080901 ; serial
+    8H ; refresh
+    4H ; retry
+    4W ; expire
+    1D ; minimum
+)
+; define the authoritative name server
+           IN NS ubuntu.home.lan.
+; our hosts, in numeric order
+1         IN PTR router.home.lan.
+2         IN PTR ubuntu.home.lan.
+3         IN PTR xbox.home.lan.
+5         IN PTR server.home.lan.
+9         IN PTR print-srv.home.lan.

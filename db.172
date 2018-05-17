@@ -1,0 +1,32 @@
+; The following parameters set when DNS records will expire, etc.
+; Importantly, the serial number must always be iterated upward to prevent
+; undesirable consequences. A good format to use is YYYYMMDDII where
+; the II index is in case you make more that one change in the same day.
+$ORIGIN .
+$TTL 86400      ; 1 day
+home.lan. IN SOA ubuntu.home.lan. hostmaster.home.lan. (
+    2008080901 ; serial
+    8H ; refresh
+    4H ; retry
+    4W ; expire
+    1D ; minimum
+)
+
+; NS indicates that ubuntu is the name server on home.lan
+; MX indicates that ubuntu is (also) the mail server on home.lan
+home.lan. IN NS ubuntu.home.lan.
+home.lan. IN MX 10 ubuntu.home.lan.
+
+$ORIGIN home.lan.
+
+; Set the address for localhost.home.lan
+localhost    IN A 127.0.0.1
+
+; Set the hostnames in alphabetical order
+print-srv    IN A 172.17.0.9
+router       IN A 172.17.0.1
+server       IN A 172.17.0.5
+ubuntu       IN A 172.17.0.2
+xbox         IN A 172.17.0.3
+
+2.0.17.172.in-addr.arpa.	IN	PTR	ubuntu.
